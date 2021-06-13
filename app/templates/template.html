@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="google-signin-client_id" content="268607576142-fji5gsrr48196i4kd4ce6e20al1nrl44.apps.googleusercontent.com.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="268607576142-fji5gsrr48196i4kd4ce6e20al1nrl44.apps.googleusercontent.com">
     <meta name="google-site-verification" content="m9UJk7PDwedT-6NtdTroMl3seI6up0bzGbATqs7HmBQ" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -23,6 +23,15 @@
             var id_token = googleUser.getAuthResponse().id_token;
             console.log("ID Token: " + id_token);
         }
+    </script>
+    <a href="#" onclick="signOut();">Sign out</a>
+    <script>
+      function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+        });
+      }
     </script>
     <div>
         {% block content %} {% endblock %}
