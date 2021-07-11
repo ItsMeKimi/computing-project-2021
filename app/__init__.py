@@ -6,6 +6,10 @@ app = Flask(__name__)
 def index():
     return render_template('main.html')
 
+@app.route('/login')
+def page_login():
+    return render_template('index.html')
+
 @app.errorhandler(404)
 def not_found(error):
     return render_template('404.html'), 404
