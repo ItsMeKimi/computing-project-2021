@@ -16,6 +16,3 @@ def mysite_app(test_config=None):
         return render_template('404.html'), 404
 
     return app
-
-if __name__ == '__main__':
-    app.run(debug=True)
