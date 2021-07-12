@@ -9,7 +9,7 @@ def mysite_app(test_config=None):
 
     @app.route('/login/')
     def page_login():
-        return render_template('index.html')
+        return render_template('/login/index.html')
 
     @app.errorhandler(404)
     def not_found(error):
