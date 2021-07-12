@@ -15,7 +15,7 @@ def mysite_app(test_config=None):
     def not_found(error):
         return render_template('404.html'), 404
 
-    if __name__ == '__main__':
-        app.run(debug=True)
-
     return app
+
+if __name__ == '__main__':
+    app.run(debug=True)
