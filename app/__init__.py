@@ -1,7 +1,5 @@
 from flask import Flask, render_template
 
-app = Flask(__name__)
-
 def mysite_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
 
