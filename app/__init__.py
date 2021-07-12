@@ -2,17 +2,19 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-@app.route('/')
-def index():
-    return render_template('main.html')
+def mysite_app(test_config=None):
+    app = Flask(__name__, instance_relative_config=True)
 
-@app.route('/login')
-def page_login():
-    return render_template('index.html')
+    @app.route('/')
+    def index():
+        return render_template('main.html')
 
-@app.errorhandler(404)
-def not_found(error):
-    return render_template('404.html'), 404
+    @app.route('/login')
+    def page_login():
+        return render_template('index.html')
 
-if __name__ == '__main__':
-    app.run(debug=True)
+    @app.errorhandler(404)
+    def not_found(error):
+        return render_template('404.html'), 404
+
+    return app
