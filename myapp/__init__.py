@@ -5,7 +5,7 @@ def mysite_app(test_config=None):
 
     @app.route('/')
     def index():
-        return render_template('home.html')
+        return render_template('home.html') 
 
     @app.route('/login/')
     def page_login():
@@ -14,6 +14,14 @@ def mysite_app(test_config=None):
     @app.route('/my-account/')
     def my_account():
         return render_template('/my-account/my-account.html')
+    
+    @app.route('/about/')
+    def about():
+        return render_template('/about/about.html')
+
+    @app.route('/contact/')
+    def contact():
+        return render_template('/contact/contact.html')
 
     @app.errorhandler(404)
     def not_found(error):
