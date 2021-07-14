@@ -11,6 +11,10 @@ def mysite_app(test_config=None):
     def page_login():
         return render_template('/login/index.html')
 
+    @app.route('/my-account/')
+    def my_account():
+        return render_template('/my-account/my-account.html')
+
     @app.errorhandler(404)
     def not_found(error):
         return render_template('404.html'), 404
