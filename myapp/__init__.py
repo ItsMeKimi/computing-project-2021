@@ -5,7 +5,7 @@ def mysite_app(test_config=None):
 
     @app.route('/')
     def index():
-        return render_template('main.html')
+        return render_template('home.html')
 
     @app.route('/login/')
     def page_login():
