@@ -8,7 +8,7 @@
         <meta content="Free Website Template" name="description">
 
         <!-- Favicon -->
-        <link href="../static/img/favicon.ico" rel="icon">
+        <link href="{{ url_for('static', filename="img/favicon.ico") }}" rel="icon">
 
         <!-- Google Font -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Nunito:600,700" rel="stylesheet"> 
@@ -16,13 +16,10 @@
         <!-- CSS Libraries -->
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-        <link href="{{ url_for('static', filename="lib/animate/animate.min.css") }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename="lib/owlcarousel/assets/owl.carousel.min.css") }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename="lib/flaticon/font/flaticon.css") }}" rel="stylesheet">
-        <link href="{{ url_for('static', filename="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css") }}" rel="stylesheet" />
-
-        <!-- Template Stylesheet -->
-        <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename="lib/animate/animate.min.css") }}" type="style/css" rel="stylesheet">
+        <link href="{{ url_for('static', filename="lib/owlcarousel/assets/owl.carousel.min.css") }}" type="style/css" rel="stylesheet">
+        <link href="{{ url_for('static', filename="lib/flaticon/font/flaticon.css") }}" type="style/css" rel="stylesheet">
+        <link href="{{ url_for('static', filename="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css") }}" type="style/css" rel="stylesheet" />
 
         <!-- Google Related -->
         <meta name="google-signin-client_id" content="268607576142-fji5gsrr48196i4kd4ce6e20al1nrl44.apps.googleusercontent.com">
@@ -117,17 +114,17 @@
         <!-- JavaScript Libraries -->
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-        <script src="/static/lib/easing/easing.min.js"></script>
-        <script src="/static/lib/owlcarousel/owl.carousel.min.js"></script>
-        <script src="/static/lib/tempusdominus/js/moment.min.js"></script>
-        <script src="/static/lib/tempusdominus/js/moment-timezone.min.js"></script>
-        <script src="/static/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+        <script src="{{ url_for('static', filename="lib/easing/easing.min.js") }}"></script>
+        <script src="{{ url_for('static', filename="lib/owlcarousel/owl.carousel.min.js") }}"></script>
+        <script src="{{ url_for('static', filename="lib/tempusdominus/js/moment.min.js") }}"></script>
+        <script src="{{ url_for('static', filename="lib/tempusdominus/js/moment-timezone.min.js") }}"></script>
+        <script src="{{ url_for('static', filename="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js") }}"></script>
         
         <!-- Contact Javascript File -->
-        <script src="/static/mail/jqBootstrapValidation.min.js"></script>
-        <script src="/static/mail/contact.js"></script>
+        <script src="{{ url_for('static', filename="mail/jqBootstrapValidation.min.js") }}"></script>
+        <script src="{{ url_for('static', filename="mail/contact.js") }}"></script>
 
         <!-- Template Javascript -->
-        <script src="/static/js/main.js"></script>
+        <script src="{{ url_for('static', filename="js/main.js") }}"></script>
     </body>
 </html>
