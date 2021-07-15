@@ -15,7 +15,7 @@ def mysite_app(test_config=None):
 
     @app.route('/login/')
     def page_login():
-        return render_template('/login/index.html')
+        return render_template('/login/login.html')
 
     @app.route('/my-account/')
     def my_account():
