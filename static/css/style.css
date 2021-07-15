@@ -1,3 +1,11 @@
+/* Custom CSS */
+
+.custom_center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 /*******************************/
 /********* General CSS *********/
 /*******************************/
