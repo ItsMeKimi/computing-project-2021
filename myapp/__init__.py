@@ -1,5 +1,8 @@
 from flask import Flask, render_template
 
+def page_not_found(error):
+    return render_template('404.html'), 404
+
 def mysite_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
 
@@ -23,8 +26,6 @@ def mysite_app(test_config=None):
     def contact():
         return render_template('/contact/contact.html')
 
-    @app.errorhandler(404)
-    def not_found(error):
-        return render_template('404.html'), 404
+    app.register_error_handler(404, page_not_found)
 
     return app
