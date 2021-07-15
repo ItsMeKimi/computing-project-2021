@@ -3,6 +3,9 @@ from flask import Flask, render_template
 def page_not_found(error):
     return render_template('404.html'), 404
 
+def internal_server_error(error):
+    return render_template('500.html'), 500
+
 def mysite_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
 
@@ -27,5 +30,6 @@ def mysite_app(test_config=None):
         return render_template('/contact/contact.html')
 
     app.register_error_handler(404, page_not_found)
+    app.register_error_handler(500, internal_server_error)
 
     return app
