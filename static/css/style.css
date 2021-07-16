@@ -1,3 +1,10 @@
+/** Custom CSS **/
+
+.custom-body {
+    display: flex;
+    text-align: center;
+}
+
 /*******************************/
 /********* General CSS *********/
 /*******************************/
