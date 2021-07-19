@@ -17,6 +17,14 @@
     align-items: center;
 }
 
+#my-signin2 {
+    display: block;
+}
+
+#logoutButton {
+    display: none;
+}
+
 /** Navigation bar for mobile **/
 
 .navbar {

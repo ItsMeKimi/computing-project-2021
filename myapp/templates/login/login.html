@@ -6,10 +6,12 @@
     <h1>Login Page</h1>
 
     <div id="my-signin2"></div>
-    <a href="#" onclick="signOut();">Sign out</a>
+    <a href="#" onclick="signOut();" id="logoutButton">Sign out</a>
     <script>
         function onSuccess(googleUser) {
             console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+            document.getElementById("my-sigin2").style.display = "none";
+            document.getElementById("logoutButton").style.display = "block"
         }
 
         function onFailure(error) {
