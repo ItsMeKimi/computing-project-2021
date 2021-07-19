@@ -22,7 +22,7 @@
 }
 
 #logoutButton {
-    display: block;
+    display: none;
 }
 
 /** Navigation bar for mobile **/
