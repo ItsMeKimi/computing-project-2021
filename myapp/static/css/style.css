@@ -1,8 +1,20 @@
 
-.custom-body {
+.mainBody {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     padding-top: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.homePage {
+    padding-top: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 /** Navigation bar for mobile **/
