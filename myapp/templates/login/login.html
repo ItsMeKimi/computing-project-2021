@@ -10,11 +10,12 @@
     <script>
         function onSuccess(googleUser) {
             console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-            CheckSignedIn();
+            updateCheckSignedIn();
         }
 
         function onFailure(error) {
             console.log(error);
+            updateCheckSignedIn();
         }
 
         function renderButton() {
@@ -40,12 +41,7 @@
             renderButton();
         }
         
-    </script>
-
-    <script src="https://apis.google.com/js/platform.js?onload=loadSite" async defer></script>
-
-    <script>
-        function CheckSignedIn() {
+        function updateCheckSignedIn() {
             if (gapi.auth2.getAuthInstance().isSignedIn.ee == false) {
                 document.getElementById("my-signin2").style.display = "block";
                 document.getElementById("logoutButton").style.display = "none";
@@ -55,4 +51,6 @@
             }
         }
     </script>
+
+    <script src="https://apis.google.com/js/platform.js?onload=loadSite" async defer></script>
 {% endblock %}
