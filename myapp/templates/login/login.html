@@ -15,7 +15,6 @@
 
         function onFailure(error) {
             console.log(error);
-            updateCheckSignedIn();
         }
 
         function renderButton() {
@@ -35,6 +34,7 @@
             auth2.signOut().then(function () {
                 console.log('User signed out.');
             });
+            updateCheckSignedIn();
         }
 
         function loadSite() {
