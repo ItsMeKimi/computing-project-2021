@@ -36,14 +36,17 @@
                 console.log('User signed out.');
             });
         }
+
+        function loadSite() {
+            renderButton();
+            CheckSignedIn();
+        }
         
     </script>
 
-    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+    <script src="https://apis.google.com/js/platform.js?onload=loadSite" async defer></script>
 
     <script>
-        window.onLoadCallback = CheckSignedIn();
-
         function CheckSignedIn() {
             if (gapi.auth2.getAuthInstance().isSignedIn.ee == false) {
                 document.getElementById("my-signin2").style.display = "block";
