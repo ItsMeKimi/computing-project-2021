@@ -42,12 +42,16 @@
     <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 
     <script>
-        if (gapi.auth2.getAuthInstance().isSignedIn.ee == false) {
-            document.getElementById("my-signin2").style.display = "block";
-            document.getElementById("logoutButton").style.display = "none";
-        } else {
-            document.getElementById("my-signin2").style.display = "none";
-            document.getElementById("logoutButton").style.display = "block";
+        window.onLoadCallback = CheckSignedIn();
+
+        function CheckSignedIn() {
+            if (gapi.auth2.getAuthInstance().isSignedIn.ee == false) {
+                document.getElementById("my-signin2").style.display = "block";
+                document.getElementById("logoutButton").style.display = "none";
+            } else {
+                document.getElementById("my-signin2").style.display = "none";
+                document.getElementById("logoutButton").style.display = "block";
+            }
         }
     </script>
 {% endblock %}
