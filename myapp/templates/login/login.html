@@ -5,7 +5,6 @@
 {% block mainBody %}
     <h1>Login Page</h1>
 
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
     <div id="my-signin2"></div>
     <script>
         function onSuccess(googleUser) {
@@ -28,4 +27,6 @@
             });
         }
     </script>
+
+    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 {% endblock %}
