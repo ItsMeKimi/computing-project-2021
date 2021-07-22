@@ -29,6 +29,10 @@ def mysite_app(test_config=None):
     def contact():
         return render_template('/contact/contact.html')
 
+    @app.route('/menu/')
+    def menu():
+        return render_template('/menu/menu.html')
+
     app.static_folder = 'static'
 
     app.register_error_handler(404, page_not_found)
