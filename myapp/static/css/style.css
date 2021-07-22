@@ -17,6 +17,24 @@
     align-items: center;
 }
 
+.aboutPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.contactPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
 /*
 
 .loginPage {
