@@ -17,6 +17,8 @@
     align-items: center;
 }
 
+/*
+
 .loginPage {
     padding: 100px;
     display: flex;
@@ -28,6 +30,8 @@
     border-width: 3px;
     border-radius: 20px;
 }
+
+*/
 
 #my-signin2 {
     display: block;
