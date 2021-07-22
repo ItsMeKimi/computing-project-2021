@@ -1,0 +1,39 @@
+.mainBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#my-signin2 {
+    display: block;
+}
+
+#logoutButton {
+    display: none;
+}
+
+/** Navigation bar for mobile **/
+
+.navbar {
+    position: relative;
+    transition: .5s;
+    z-index: 999;
+}
+
+.navbar.nav-sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
+}
+
+.navbar .dropdown-menu {
+    margin-top: 0;
+    border: 0;
+    border-radius: 0;
+    background: #f8f9fa;
+}
+
