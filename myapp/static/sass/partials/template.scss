@@ -1,0 +1,26 @@
+/* Universal SCSS */
+
+@mixin flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+@mixin flex-column {
+    @include flex-container;
+
+    flex-direction: column;
+}
+
+@mixin mainBody {
+    @include flex-column;
+
+    padding-top: 20px;
+}
+
+/* Universal CSS */
+
+.mainBody {
+    @include mainBody;
+}

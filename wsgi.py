@@ -7,7 +7,7 @@ app = mysite_app()
 assets = Environment(app)
 assets.url = app.static_url_path
 
-scss = Bundle('sass/index.scss', filters='pyscss', output='all.css')
+scss = Bundle('sass/style.scss', filters='pyscss', output='css/style.css')
 
 assets.config['SECRET_KEY'] = 'secret!'
 assets.config['PYSCSS_LOAD_PATHS'] = assets.load_path

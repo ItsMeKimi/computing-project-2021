@@ -1,6 +1,43 @@
-@import "template/template.css";
+.mainBody {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding-top: 20px; }
 
-@import "home/home.css";
-@import "about/about.css";
-@import "contact/contact.css";
-/* @import "login/login.css"; */
+  .homePage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding-top: 200px; }
+
+    .aboutPage {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      flex-direction: column;
+      padding-top: 20px;
+      width: 500px; }
+
+      .contactPage {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        flex-direction: column;
+        padding-top: 20px; }
+
+        .loginPage {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-wrap: wrap;
+          flex-direction: column;
+          border-style: solid;
+          border-width: 3px;
+          border-radius: 20px;
+          padding: 100px; }

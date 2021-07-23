@@ -1,0 +1,12 @@
+@import "template.scss";
+
+@mixin aboutPage {
+    @include flex-column;
+
+    padding-top: 20px;
+    width: 500px;
+}
+
+.aboutPage {
+    @include aboutPage;
+}

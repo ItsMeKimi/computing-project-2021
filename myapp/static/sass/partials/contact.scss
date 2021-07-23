@@ -1,0 +1,11 @@
+@import "template.scss";
+
+@mixin contactPage {
+    @include flex-column;
+
+    padding-top: 20px;
+}
+
+.contactPage {
+    @include contactPage;
+}

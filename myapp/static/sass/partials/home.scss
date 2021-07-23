@@ -1,0 +1,11 @@
+@import "template.scss";
+
+@mixin homePage {
+    @include flex-column;
+
+    padding-top: 200px;
+}
+
+.homePage {
+    @include homePage;
+}
