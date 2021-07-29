@@ -1,7 +1,7 @@
 @import "template.scss";
 
 @mixin menuPage {
-    @include flex-column;
+    @include flex-container;
 }
 
 @mixin menuElement {
