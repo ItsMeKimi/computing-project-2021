@@ -1,0 +1,21 @@
+@import "template.scss";
+
+@mixin menuPage {
+    @include flex-column;
+}
+
+@mixin menuElement {
+    @include flex-container;
+
+    margin: 10px;
+    width: 60%;
+    padding: 10px;
+}
+
+.menuPage {
+    @include menuPage;
+}
+
+.menuElement {
+    @include menuElement;
+}
