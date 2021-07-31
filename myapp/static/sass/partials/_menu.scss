@@ -1,0 +1,29 @@
+@import "template";
+
+@mixin menuRow {
+    @include flex-container;
+
+    margin: 10px;
+    width: 60%;
+    flex-wrap: nowrap !important; 
+}
+
+@mixin menuItem {
+
+}
+
+.menuRow {
+    @include menuRow;
+}
+
+.menuItem {
+    @include menuItem;
+}
+
+.menuImg {
+    display: block;
+    max-width: 30%;
+    max-height: 30%;
+    width: auto;
+    height: auto;
+}
