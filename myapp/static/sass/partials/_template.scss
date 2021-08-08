@@ -1,16 +1,42 @@
 /* Universal SCSS */
 
-@mixin flex-container {
+/* Sub SCSS */
+
+@mixin display-flex {
     display: flex;
+}
+
+@mixin justify-content-center {
     justify-content: center;
+}
+
+@mixin align-items-center {
     align-items: center;
+}
+
+@mixin flex-wrap-wrap {
     flex-wrap: wrap;
 }
 
+@mixin flex-direction-column {
+    flex-direction: column;
+}
+
+/* Normal SCSS */
+
+@mixin flex-container {
+    @include display-flex;
+    @include justify-content-center();
+    @include align-items-center();
+    @include flex-wrap-wrap();
+}
+
 @mixin flex-column {
+    /* Default */
     @include flex-container;
 
-    flex-direction: column;
+    /* New */
+    @include flex-direction-column();
 }
 
 @mixin mainBody {

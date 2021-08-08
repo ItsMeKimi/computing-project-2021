@@ -4,12 +4,29 @@
     @include flex-container;
 
     margin: 10px;
-    width: 60%;
+    width: 70%;
     flex-wrap: nowrap !important; 
 }
 
-@mixin menuItem {
+@mixin menuImgContainer {
+    @include display-flex();
+    @include justify-content-center();
+}
 
+@mixin menuItem {
+    @include justify-content-center();
+}
+
+@mixin cursor-pointer {
+    cursor: pointer;
+}
+
+@mixin menuItemStoreTitle {
+    color: black !important;
+}
+
+@mixin font-weight-bold {
+    font-weight: bold;
 }
 
 .menuRow {
@@ -18,12 +35,39 @@
 
 .menuItem {
     @include menuItem;
+    @include cursor-pointer();
+
+    padding: 10px;
 }
 
 .menuImg {
     display: block;
-    max-width: 30%;
-    max-height: 30%;
+    max-width: 100%;
+    max-height: 100%;
     width: auto;
     height: auto;
+}
+
+#menuItemName {
+    text-align: center;
+}
+
+.menuImgContainer {
+    @include menuImgContainer();
+}
+
+.menuItemStoreTitle {
+    @include menuItemStoreTitle();
+}
+
+.menuItemStoreName, .menuItemStoreName {
+    @include font-weight-bold();
+}
+
+a {
+    text-decoration: none !important;
+}
+
+a:hover {
+    text-decoration: none !important;
 }
