@@ -30,3 +30,29 @@
 
 })(jQuery);
 
+/*
+
+function popupMenu(id, name, description, img) {
+    this.id = id;
+    this.name = name;
+    this.description = description;
+    this.img = img;
+    this.qty = 0
+
+    this.addQty = function () {
+        this.qty ++;
+        document.getElementById("dish-qty").innerHTML = this.qty;
+        //this.loadQty();
+    };
+    
+    this.removeQty = function () {
+        if (this.qty > 0) {
+          this.qty --;
+          document.getElementById("dish-qty").innerHTML = this.qty;
+        } else {
+          window.alert("No order to remove for this dish.")
+        }
+    };
+}
+
+*/

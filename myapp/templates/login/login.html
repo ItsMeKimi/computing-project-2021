@@ -6,8 +6,13 @@
     <div class="loginPage">
         <h1>Login Page</h1>
 
-        <div id="my-signin2"></div>
-        <a href="#" onclick="signOut();" id="logoutButton">Sign out</a>
+        <div id="g_id_onload"
+            data-client_id="268607576142-fji5gsrr48196i4kd4ce6e20al1nrl44.apps.googleusercontent.com"
+            data-ux_mode="redirect"
+            data-login_uri="/menu/">
+        </div>
+        <div class="g_id_signin" data-type="standard"></div>
+
         <script>
             function onSuccess(googleUser) {
                 console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
@@ -58,6 +63,6 @@
             }
         </script>
 
-        <script src="https://apis.google.com/js/platform.js?onload=loadSite" async defer></script>
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
     </div>
 {% endblock %}
