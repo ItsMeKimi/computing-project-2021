@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, jsonify
 from google.auth import crypt
 from google.auth import jwt
 from datetime import datetime
-from flask_sqlalchemy import SQLAlchemy
 
 #
 #
