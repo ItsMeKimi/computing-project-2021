@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 from google.auth import crypt
 from google.auth import jwt
 from datetime import datetime
+from flask_sqlalchemy import SQLAlchemy
 
 #
 #
@@ -39,6 +40,15 @@ def page_not_found(error):
 
 def internal_server_error(error):
     return render_template('/500/500.html'), 500
+
+#
+#
+# Create unique ID based off JWT "sub" for cookie system
+#
+#
+
+def create_unique_id():
+    return
 
 #
 #
