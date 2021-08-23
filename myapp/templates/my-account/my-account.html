@@ -3,5 +3,15 @@
 {% block title %} My Account {% endblock %}
 
 {% block mainBody %}
-    <h1>My Account</h1>
+    <div class="myAccount">
+        <h1>
+            My Account
+        </h1>
+
+        <p>
+            {% for data in data %}
+                {{ data }}
+            {% endfor %}
+        </p>
+    </div>
 {% endblock %}

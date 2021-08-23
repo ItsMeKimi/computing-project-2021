@@ -10,7 +10,7 @@
             data-client_id="268607576142-fji5gsrr48196i4kd4ce6e20al1nrl44.apps.googleusercontent.com"
             data-context="signin"
             data-ux_mode="popup"
-            data-callback="handleCredentialResponse"
+            data-callback="getUserInfo"
             data-nonce=""
             data-state_cookie_domain="/"
             data-skip_prompt_cookie="g_state">
@@ -25,15 +25,80 @@
             data-logo_alignment="left">
         </div>
 
+        <!--
         <div class="g_id_signout">
             <button id="signout_button">Sign Out</button>
         </div>
+        -->
     </div>
 
     <script>
+        if (window.addEventListener) { // Mozilla, Netscape, Firefox
+            window.addEventListener('load', uponPageLoad(), false);
+        } else if (window.attachEvent) { // IE
+            window.attachEvent('onload', uponPageLoad());
+        }
+        
+        function uponPageLoad() {
+            checkIfLoggedIn();
+
+            if (checkIfLoggedIn() == true) {
+                redirectIfLoginPage();
+            } else {
+                return;
+            };
+        };
+
+                
+        function getUserInfo(response) {
+            if (response == null) {
+                return;
+            } else {
+                if (checkIfLoggedIn() == true) {
+                    redirectIfLoginPage();
+                } else {
+                    handleCredentialResponse(response);
+                };
+            };
+            //redirectIfLoginPage();
+        };
+
+        // Related to cookies
+
+        function checkIfLoggedIn() {
+            let g_state_cookie_data = getCookie('g_state');
+            if (g_state_cookie_data == '{"i_l":0}') {
+                return true;
+            } else {
+                return false;
+            };
+        };
+
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for(let i = 0; i <ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        };
+
+        // End Related to cookies
+
         function handleCredentialResponse(response) {
             var responsePayload = decodeJwtResponse(response.credential);
-            redirect();
+            if (checkIfLoggedIn() == true) {
+                redirectIfLoginPage();
+            } else {
+                return;
+            };
         };
 
         function decodeJwtResponse(input){
@@ -50,13 +115,21 @@
             });
         };
 
-        function redirect(){
+        function redirectIfLoginPage() {
+            let origin = window.location.origin;
+            let relative = "/login";
+            let href = origin.concat(relative);
 
+            if (window.location.href == href) {
+                window.location.href = "/menu";
+            };
         };
 
+        /*
         const button = document.getElementById('signout_button');
             button.onclick = () => {
             google.accounts.id.disableAutoSelect();     
         }
+        */
     </script>
 {% endblock %}
