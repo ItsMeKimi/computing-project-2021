@@ -10,10 +10,10 @@
             data-client_id="268607576142-fji5gsrr48196i4kd4ce6e20al1nrl44.apps.googleusercontent.com"
             data-context="signin"
             data-ux_mode="popup"
-            data-callback="redirect"
+            data-callback="handleCredentialResponse"
             data-nonce=""
-            data-auto_prompt="false"
-            data-auto_select="true">
+            data-state_cookie_domain="/"
+            data-skip_prompt_cookie="g_state">
         </div>
 
         <div class="g_id_signin"
@@ -25,10 +25,38 @@
             data-logo_alignment="left">
         </div>
 
-        <script>
-            function redirect() {
-                window.location.href = '/menu/'
-            }
-        </script>
+        <div class="g_id_signout">
+            <button id="signout_button">Sign Out</button>
+        </div>
     </div>
+
+    <script>
+        function handleCredentialResponse(response) {
+            var responsePayload = decodeJwtResponse(response.credential);
+            redirect();
+        };
+
+        function decodeJwtResponse(input){
+            var fd = new FormData();
+            fd.append('mydata', input);
+
+            var decodeMe = $.ajax({
+                contentType: false,
+                processData: false,
+                type: "POST",
+                url: "/login",
+                async: true,
+                data: fd,
+            });
+        };
+
+        function redirect(){
+
+        };
+
+        const button = document.getElementById('signout_button');
+            button.onclick = () => {
+            google.accounts.id.disableAutoSelect();     
+        }
+    </script>
 {% endblock %}

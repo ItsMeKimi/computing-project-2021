@@ -3,3 +3,4 @@ Flask-MySQLdb==0.2.0
 gunicorn==20.1.0
 libsass==0.21.0
 Flask-Assets==2.0
+google-auth==2.0.0
