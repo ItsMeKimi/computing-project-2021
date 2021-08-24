@@ -8,11 +8,7 @@ import os.path
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 users_db_path = os.path.join(BASE_DIR, "users.db")
 
-#
-#
 # Get Current Server Timing
-#
-#
 
 def get_time():
     _day = datetime.now().strftime('%d')
@@ -23,21 +19,13 @@ def get_time():
     _second = datetime.now().strftime('%S')
     return f'{_day}/{_month}/{_year} {_hour}:{_minute}:{_second}'
 
-#
-#
 # Get User Ip Address
-#
-#
 
 def get_requester_ip():
     _ip_address = request.remote_addr
     return _ip_address
 
-#
-#
 # Error Code(s)
-#
-#
 
 def page_not_found(error):
     return render_template('/404/404.html'), 404
@@ -46,9 +34,7 @@ def internal_server_error(error):
     return render_template('/500/500.html'), 500
 
 #
-#
 # Create unique ID based off JWT "sub" for cookie system
-#
 #
 
 def create_unique_id(decoded_data):
@@ -56,54 +42,66 @@ def create_unique_id(decoded_data):
     return
 
 #
-#
 # Decode JWT Data
-#
 #
 
 def decode_JWT_data(data):
     decoded = jwt.decode(data, certs=None, verify=False)
-    insertUserInfo(decoded)
+    checkUserInfo(decoded)
     return decoded
 
 #
-#
-# Connect to Database
-#
+# Get the column info from a decoded JWT Token
 #
 
+def getColumnInfo(data):
+    iss = data['iss'] 
+    sub = data['sub']
+    hd = data['hd']
+    email = data['email']
+    email_verified = data['email_verified']
+    name = data['name']
+    given_name = data['given_name']
+    family_name = data['family_name']
+    return iss, sub, hd, email, email_verified, name, given_name, family_name
 
 #
-#
-# Send Data to Database
-#
+# Check if User already has Data in Database ; If No Data, create new entry and upload to Database
 #
 
-def insertUserInfo(data):
-    _iss = data['iss'] 
-    _sub = data['sub']
-    _hd = data['hd']
-    _email = data['email']
-    _email_verified = data['email_verified']
-    _name = data['name']
-    _given_name = data['given_name']
-    _family_name = data['family_name']
-    
+def checkUserInfo(data):
+    _iss, _sub, _hd, _email, _email_verified, _name, _given_name, _family_name = getColumnInfo(data)
+    sub_data = ''
+
     try:
         sqliteConnection = sqlite3.connect(users_db_path)
         cursor = sqliteConnection.cursor()
         print("Connected to Database")
 
-        sql_insert_query = """INSERT INTO Users
-                                (iss, sub, hd, email, email_verified, name, given_name, family_name)
-                                VALUES
-                                (?, ?, ?, ?, ?, ?, ?, ?);"""
-        data_tuple = (_iss, _sub, _hd, _email, _email_verified, _name, _given_name, _family_name)
-        cursor.execute(sql_insert_query, data_tuple)
-        sqliteConnection.commit()
-        print(f"{get_requester_ip()} - - [{get_time()}] < [DATABASE --- USERS] [{_name}] > Record Updated Successfully")
-        cursor.close()
+        sql_select_query = """SELECT * FROM Users WHERE sub = ?;"""
 
+        result_data_cursor_object = cursor.execute(sql_select_query, (_sub,))
+
+        for row in result_data_cursor_object:
+            # This will only get a sub IF there is a result
+            sub_data = row[1]
+
+        if (sub_data == _sub):
+            # Since User Info exists
+            print(f"{get_requester_ip()} - - [{get_time()}] < [DATABASE --- USERS] [{_name}] > User Info Already Exists")
+        else:
+            # Insert User Info
+            sql_insert_query = """INSERT INTO Users
+                                    (iss, sub, hd, email, email_verified, name, given_name, family_name)
+                                    VALUES
+                                    (?, ?, ?, ?, ?, ?, ?, ?);"""
+            data_tuple = (_iss, _sub, _hd, _email, _email_verified, _name, _given_name, _family_name)
+            cursor.execute(sql_insert_query, data_tuple)
+            print(f"{get_requester_ip()} - - [{get_time()}] < [DATABASE --- USERS] [{_name}] > User Info Updated")
+
+        sqliteConnection.commit()
+        cursor.close()
+        
     except sqlite3.Error as error:
         print("Error while connecting to sqlite3", error)
     finally:
@@ -112,15 +110,7 @@ def insertUserInfo(data):
             print("Connection to Database closed")
 
 #
-#
-# Get Database
-#
-#
-
-#
-#
 # App Configuration
-#
 #
 
 def mysite_app(test_config=None):
@@ -136,7 +126,7 @@ def mysite_app(test_config=None):
         if request.method == "POST":
             datafromjs = request.form['mydata']
             decoded_JWT_data = decode_JWT_data(datafromjs)
-            print(f"{get_requester_ip()} - - [{get_time()}] {decoded_JWT_data}")
+            #print(f"{get_requester_ip()} - - [{get_time()}] {decoded_JWT_data}")
         
         return render_template('/login/login.html')
 
