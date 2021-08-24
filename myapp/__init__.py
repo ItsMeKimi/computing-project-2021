@@ -2,6 +2,11 @@ from flask import Flask, render_template, request, jsonify
 from google.auth import crypt
 from google.auth import jwt
 from datetime import datetime
+import sqlite3
+import os.path
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+users_db_path = os.path.join(BASE_DIR, "users.db")
 
 #
 #
@@ -46,8 +51,71 @@ def internal_server_error(error):
 #
 #
 
-def create_unique_id():
+def create_unique_id(decoded_data):
+
     return
+
+#
+#
+# Decode JWT Data
+#
+#
+
+def decode_JWT_data(data):
+    decoded = jwt.decode(data, certs=None, verify=False)
+    insertUserInfo(decoded)
+    return decoded
+
+#
+#
+# Connect to Database
+#
+#
+
+
+#
+#
+# Send Data to Database
+#
+#
+
+def insertUserInfo(data):
+    _iss = data['iss'] 
+    _sub = data['sub']
+    _hd = data['hd']
+    _email = data['email']
+    _email_verified = data['email_verified']
+    _name = data['name']
+    _given_name = data['given_name']
+    _family_name = data['family_name']
+    
+    try:
+        sqliteConnection = sqlite3.connect(users_db_path)
+        cursor = sqliteConnection.cursor()
+        print("Connected to Database")
+
+        sql_insert_query = """INSERT INTO Users
+                                (iss, sub, hd, email, email_verified, name, given_name, family_name)
+                                VALUES
+                                (?, ?, ?, ?, ?, ?, ?, ?);"""
+        data_tuple = (_iss, _sub, _hd, _email, _email_verified, _name, _given_name, _family_name)
+        cursor.execute(sql_insert_query, data_tuple)
+        sqliteConnection.commit()
+        print(f"{get_requester_ip()} - - [{get_time()}] < [DATABASE --- USERS] [{_name}] > Record Updated Successfully")
+        cursor.close()
+
+    except sqlite3.Error as error:
+        print("Error while connecting to sqlite3", error)
+    finally:
+        if sqliteConnection:
+            sqliteConnection.close()
+            print("Connection to Database closed")
+
+#
+#
+# Get Database
+#
+#
 
 #
 #
@@ -57,6 +125,7 @@ def create_unique_id():
 
 def mysite_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
+    app.config.from_object(__name__)
 
     @app.route('/')
     def index():
@@ -66,8 +135,8 @@ def mysite_app(test_config=None):
     def login():
         if request.method == "POST":
             datafromjs = request.form['mydata']
-            decoded = jwt.decode(datafromjs, certs=None, verify=False)
-            print(f"{get_requester_ip()} - - [{get_time()}] {decoded}")
+            decoded_JWT_data = decode_JWT_data(datafromjs)
+            print(f"{get_requester_ip()} - - [{get_time()}] {decoded_JWT_data}")
         
         return render_template('/login/login.html')
 

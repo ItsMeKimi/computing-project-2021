@@ -10,7 +10,7 @@
             data-client_id="268607576142-fji5gsrr48196i4kd4ce6e20al1nrl44.apps.googleusercontent.com"
             data-context="signin"
             data-ux_mode="popup"
-            data-callback="getUserInfo"
+            data-callback="handleCredentialResponse"
             data-nonce=""
             data-state_cookie_domain="/"
             data-skip_prompt_cookie="g_state">
@@ -49,7 +49,7 @@
             };
         };
 
-                
+        // Code Below is broken; should be replaced by token system
         function getUserInfo(response) {
             if (response == null) {
                 return;
@@ -120,9 +120,11 @@
             let relative = "/login";
             let href = origin.concat(relative);
 
+            /*
             if (window.location.href == href) {
                 window.location.href = "/menu";
             };
+            */
         };
 
         /*
