@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, session, url_for
 from google.auth import crypt
 from google.auth import jwt
 from datetime import datetime
@@ -6,6 +6,7 @@ import sqlite3
 import os.path
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+SECRET_KEY = 'IIWWC96ZE1K7WJB8LY8M8VQ80OC4A4884QJCH3KIL3Y5F19P03R13PYEPO9JOST91S72IJ6BMB7MGY2EYMB8HT72MRD0IBSBB6D33D6OFZ87J7EYEO6KXP9MX3MD8M1TSAGPS2TCXXOXJNBA71WKVOMGM5M41ZMI2BQZG5SUN2Y9RI3WW2O4EMNBGUM7MQEOQRF2ESRBQ85DYTXRK0QT04I7L4RXLJ3XFZHUS7MIWT0Z0ETRR8SAAX6IHJ73OO6O'
 users_db_path = os.path.join(BASE_DIR, "users.db")
 
 # Get Current Server Timing
@@ -37,16 +38,14 @@ def internal_server_error(error):
 # Create unique ID based off JWT "sub" for cookie system
 #
 
-def create_unique_id(decoded_data):
-
-    return
-
 #
 # Decode JWT Data
 #
 
 def decode_JWT_data(data):
     decoded = jwt.decode(data, certs=None, verify=False)
+    
+    _sub = decoded['sub']
     checkUserInfo(decoded)
     return decoded
 
@@ -109,6 +108,10 @@ def checkUserInfo(data):
             sqliteConnection.close()
             print("Connection to Database closed")
 
+# Retrieve User Info for My Account Page
+
+def retrieveUserInfo():
+    return
 #
 # App Configuration
 #
@@ -116,23 +119,28 @@ def checkUserInfo(data):
 def mysite_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(__name__)
-
+ 
     @app.route('/')
     def index():
-        return render_template('/home/home.html') 
+        if 'session_id' in session:
+            session_id = session['session_id']
+            print(f'Logged in as {session_id}')
+
+        return render_template('/home/home.html')
 
     @app.route('/login', methods=['GET', 'POST'])
     def login():
         if request.method == "POST":
             datafromjs = request.form['mydata']
             decoded_JWT_data = decode_JWT_data(datafromjs)
+            session['session_id'] = decoded_JWT_data['sub']
             #print(f"{get_requester_ip()} - - [{get_time()}] {decoded_JWT_data}")
         
         return render_template('/login/login.html')
 
     @app.route('/my-account')
     def my_account():
-        theData = [""]
+        theData = session['session_id']
 
         return render_template('/my-account/my-account.html', data=theData)
     
