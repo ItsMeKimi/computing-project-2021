@@ -35,10 +35,6 @@ def internal_server_error(error):
     return render_template('/500/500.html'), 500
 
 #
-# Create unique ID based off JWT "sub" for cookie system
-#
-
-#
 # Decode JWT Data
 #
 
@@ -110,8 +106,36 @@ def checkUserInfo(data):
 
 # Retrieve User Info for My Account Page
 
-def retrieveUserInfo():
-    return
+def retrieveUserInfo(sub_data):
+    _sub = sub_data
+
+    try:
+        sqliteConnection = sqlite3.connect(users_db_path)
+        cursor = sqliteConnection.cursor()
+        print("Connected to Database")
+
+        sql_select_query = """SELECT * FROM Users WHERE sub = ?;"""
+
+        result_data_cursor_object = cursor.execute(sql_select_query, (_sub,))
+
+        for row in result_data_cursor_object:
+            temp = []
+            for i in range(len(row)):
+                temp.append(row[i])
+                #print(temp)
+
+        sqliteConnection.commit()
+        cursor.close()
+        print(f"{get_requester_ip()} - - [{get_time()}] < [DATABASE --- USERS] > Row Info Received")
+        return temp
+    
+    except sqlite3.Error as error:
+        print("Error while connecting to sqlite3", error)
+    finally:
+        if sqliteConnection:
+            sqliteConnection.close()
+            print("Connection to Database closed")
+
 #
 # App Configuration
 #
@@ -140,9 +164,10 @@ def mysite_app(test_config=None):
 
     @app.route('/my-account')
     def my_account():
-        theData = session['session_id']
+        uniqueSessionID = session['session_id']
+        row = retrieveUserInfo(uniqueSessionID)
 
-        return render_template('/my-account/my-account.html', data=theData)
+        return render_template('/my-account/my-account.html', data=row)
     
     @app.route('/about')
     def about():

@@ -9,9 +9,23 @@
         </h1>
 
         <p>
-            {% for data in data %}
-                {{ data }}
-            {% endfor %}
+            <table>
+                <tr>
+                    <th>iss</th>
+                    <th>sub</th>
+                    <th>hd</th>
+                    <th>email</th>
+                    <th>email_verified</th>
+                    <th>name</th>
+                    <th>given_name</th>
+                    <th>family_name</th>
+                </tr>
+                <tr>
+                    {% for item in data %}
+                        <td> {{ item }} </td>
+                    {% endfor %}
+                </tr>
+            </table>
         </p>
     </div>
 {% endblock %}
