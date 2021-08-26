@@ -5,3 +5,5 @@ Flask-Assets==2.0
 google-auth==2.0.0
 Flask-SQLAlchemy==2.5.1
 psycopg2-binary==2.9.1
+Flask[aysnc]==2.0.1
+asgiref==3.4.1
