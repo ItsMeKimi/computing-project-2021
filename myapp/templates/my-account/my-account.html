@@ -5,8 +5,12 @@
 {% block mainBody %}
     <div class="myAccount">
         <h1>
-            My Account
+            <h1>My Account</h1>
         </h1>
+
+        <p>
+            The table below contains the information that we have stored about you. 
+        </p>
 
         <p>
             <table>
@@ -27,5 +31,35 @@
                 </tr>
             </table>
         </p>
+
+        <p>
+            {{ message }}
+        </p>
+
+        <div class="deleteData">
+            <button id="deleteData_button">Delete Data Permanently</button>
+        </div>
     </div>
+
+    <script>
+        function deleteUserData(){
+            var fd = new FormData();
+            fd.append('mydata', 'garbage_data');
+
+            var deleteThis = $.ajax({
+                contentType: false,
+                processData: false,
+                type: "POST",
+                url: "/my-account",
+                async: true,
+                data: fd,
+            });
+        };
+
+        const button = document.getElementById('deleteData_button');
+            button.onclick = () => {
+            deleteUserData();
+            setTimeout(location.reload.bind(location), 1500);
+        };
+    </script>
 {% endblock %}

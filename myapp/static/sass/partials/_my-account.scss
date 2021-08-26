@@ -1,5 +1,15 @@
 @import "template";
 
+@mixin myAccount {
+    @include flex-column;
+
+    padding-top: 20px;
+}
+
+.myAccount {
+    @include myAccount();
+}
+
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
