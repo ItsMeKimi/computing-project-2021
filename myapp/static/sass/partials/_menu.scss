@@ -1,13 +1,5 @@
 @import "template";
 
-@mixin menuRow {
-    @include flex-container;
-
-    margin: 10px;
-    width: 70%;
-    flex-wrap: nowrap !important; 
-}
-
 @mixin menuImgContainer {
     @include display-flex();
     @include justify-content-center();
@@ -15,6 +7,7 @@
 
 @mixin menuItem {
     @include justify-content-center();
+    flex-wrap: nowrap !important; 
 }
 
 @mixin cursor-pointer {
@@ -29,45 +22,100 @@
     font-weight: bold;
 }
 
-.menuRow {
-    @include menuRow;
+
+// For laptops and tablets
+@media screen and (min-width: 481px) {
+    .menuItem {
+        @include menuItem;
+        @include cursor-pointer();
+    
+        padding: 10px;
+        width: 17.5vw;
+    }
+    
+    .menuImg {
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+    }
+    
+    #menuItemName {
+        text-align: center;
+    }
+    
+    .menuImgContainer {
+        @include menuImgContainer();
+    }
+    
+    .menuItemStoreTitle {
+        @include menuItemStoreTitle();
+    }
+    
+    .menuItemStoreName, .menuItemStoreName {
+        @include font-weight-bold();
+    }
+    
+    a {
+        text-decoration: none !important;
+    }
+    
+    a:hover {
+        text-decoration: none !important;
+    }
+    
+    .storeBox {
+        @include flex-container();
+    
+        width: 70vw;
+    }
 }
 
-.menuItem {
-    @include menuItem;
-    @include cursor-pointer();
+// For mobile devices
 
-    padding: 10px;
-}
+@media screen and (max-width: 480px) {
+    .menuItem {
+        @include menuItem;
+        @include cursor-pointer();
 
-.menuImg {
-    display: block;
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-}
-
-#menuItemName {
-    text-align: center;
-}
-
-.menuImgContainer {
-    @include menuImgContainer();
-}
-
-.menuItemStoreTitle {
-    @include menuItemStoreTitle();
-}
-
-.menuItemStoreName, .menuItemStoreName {
-    @include font-weight-bold();
-}
-
-a {
-    text-decoration: none !important;
-}
-
-a:hover {
-    text-decoration: none !important;
+        padding: 1vw;
+        width: 94vw;
+    }
+    
+    .menuImg {
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+    }
+    
+    #menuItemName {
+        text-align: center;
+    }
+    
+    .menuImgContainer {
+        @include menuImgContainer();
+    }
+    
+    .menuItemStoreTitle {
+        @include menuItemStoreTitle();
+    }
+    
+    .menuItemStoreName, .menuItemStoreName {
+        @include font-weight-bold();
+    }
+    
+    a {
+        text-decoration: none !important;
+    }
+    
+    a:hover {
+        text-decoration: none !important;
+    }
+    
+    .storeBox {
+        @include flex-container();
+    }
 }

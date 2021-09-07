@@ -3,9 +3,9 @@
 {% block title %} Contact {% endblock %}
 
 {% block mainBody %}
-    <div class="menuRow">
+    <div class="storeBox">
         <div id="1" class="menuItem">
-            <a class="storePage" href="../login">
+            <a class="storePage" onclick="chooseModal('1')">
                 <figure>
                     <img class="menuImg" src="{{ url_for('static', filename="img/Hainanese_Chicken_Rice.jpg") }}">
                     <figcaption>
@@ -21,8 +21,8 @@
                 </figure>
             </a>
         </div>
-        <div id="2" class="menuItem">
-            <a class="storePage" href="../login">
+        <div id="5" class="menuItem">
+            <a class="storePage" onclick="chooseModal('5')">
                 <figure>
                     <img class="menuImg" src="{{ url_for('static', filename="img/Hainanese_Chicken_Rice.jpg") }}">
                     <figcaption>
@@ -38,8 +38,8 @@
                 </figure>
             </a>
         </div>
-        <div class="menuItem">
-            <a class="storePage" href="../login">
+        <div id="9" class="menuItem">
+            <a class="storePage" onclick="chooseModal('9')">
                 <figure>
                     <img class="menuImg" src="{{ url_for('static', filename="img/Hainanese_Chicken_Rice.jpg") }}">
                     <figcaption>
@@ -55,8 +55,8 @@
                 </figure>
             </a>
         </div>
-        <div class="menuItem">
-            <a class="storePage" href="../login">
+        <div id='10' class="menuItem">
+            <a class="storePage" onclick="chooseModal('10')">
                 <figure>
                     <img class="menuImg" src="{{ url_for('static', filename="img/Hainanese_Chicken_Rice.jpg") }}">
                     <figcaption>
@@ -65,17 +65,15 @@
                                 Vegetarian Food
                             </span>
                             <div class="menuItemStoreNumber">
-                                Store ???
+                                Store 10
                             </div>
                         </span>
                     </figcaption>
                 </figure>
             </a>
         </div>
-    </div>
-    <div class="menuRow">
-        <div class="menuItem">
-            <a class="storePage" href="../login">
+        <div id='11' class="menuItem">
+            <a class="storePage" onclick="chooseModal('11')">
                 <figure>
                     <img class="menuImg" src="{{ url_for('static', filename="img/Hainanese_Chicken_Rice.jpg") }}">
                     <figcaption>
@@ -84,15 +82,15 @@
                                 Thai Food
                             </span>
                             <div class="menuItemStoreNumber">
-                                Store ???
+                                Store 11
                             </div>
                         </span>
                     </figcaption>
                 </figure>
             </a>
         </div>
-        <div class="menuItem">
-            <a class="storePage" href="../login">
+        <div id='12' class="menuItem">
+            <a class="storePage" onclick="chooseModal('12')">
                 <figure>
                     <img class="menuImg" src="{{ url_for('static', filename="img/Hainanese_Chicken_Rice.jpg") }}">
                     <figcaption>
@@ -108,8 +106,8 @@
                 </figure>
             </a>
         </div>
-        <div class="menuItem">
-            <a class="storePage" href="../login">
+        <div id='13' class="menuItem">
+            <a class="storePage" onclick="chooseModal('13')">
                 <figure>
                     <img class="menuImg" src="{{ url_for('static', filename="img/Hainanese_Chicken_Rice.jpg") }}">
                     <figcaption>
@@ -125,8 +123,8 @@
                 </figure>
             </a>
         </div>
-        <div class="menuItem">
-            <a class="storePage" href="../login">
+        <div id='15' class="menuItem">
+            <a class="storePage" onclick="chooseModal('15')">
                 <figure>
                     <img class="menuImg" src="{{ url_for('static', filename="img/Hainanese_Chicken_Rice.jpg") }}">
                     <figcaption>
@@ -142,4 +140,50 @@
                 </figure>
             </a>
         </div>
+        <div id='0' class="menuItem">
+            <a class="storePage" onclick="chooseModal('0')">
+                <figure>
+                    <img class="menuImg" src="{{ url_for('static', filename="img/Hainanese_Chicken_Rice.jpg") }}">
+                    <figcaption>
+                        <span class="menuItemStoreTitle">
+                            <span class="menuItemStoreName">
+                                Cafe
+                            </span>
+                            <div class="menuItemStoreNumber">
+                                
+                            </div>
+                        </span>
+                    </figcaption>
+                </figure>
+            </a>
+        </div>
+    </div>
+
+        <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch demo modal
+    </button>
+    
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block addJS %} 
+    <script src="{{ url_for('static', filename='js/menu.js') }}"></script>
 {% endblock %}

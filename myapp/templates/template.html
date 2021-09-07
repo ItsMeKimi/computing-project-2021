@@ -9,7 +9,7 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Nunito:600,700" rel="stylesheet" /> 
         
         <!-- CSS Libraries -->
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
         
@@ -46,16 +46,19 @@
 
         <!-- JavaScript Libraries -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js" type="style/js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
         
         <!-- Contact Javascript File -->
-        <script src="{{ url_for('static', filename="mail/jqBootstrapValidation.min.js") }}" type="style/js"></script>
-        <script src="{{ url_for('static', filename="mail/contact.js") }}" type="style/js"></script>
+        <script src="{{ url_for('static', filename='mail/jqBootstrapValidation.min.js') }}" type="style/js"></script>
+        <script src="{{ url_for('static', filename='mail/contact.js') }}" type="style/js"></script>
 
         <!-- Template Javascript -->
-        <script src="{{ url_for('static', filename="js/main.js") }}"></script>
+        <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
         <!-- Google Identity Client API-->
         <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+        <!-- Additional Javascript Files if Needed -->
+        {% block addJS %} {% endblock %}
     </body>
 </html>
