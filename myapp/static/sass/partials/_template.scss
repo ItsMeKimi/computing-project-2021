@@ -45,6 +45,10 @@
     padding-top: 20px;
 }
 
+@mixin margin-top-auto {
+    margin-top: auto;
+}
+
 /* Universal CSS */
 
 .mainBody {

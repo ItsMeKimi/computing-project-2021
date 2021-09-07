@@ -119,3 +119,31 @@
         @include flex-container();
     }
 }
+
+.marginTopAuto {
+    @include margin-top-auto();
+    padding: 3%;
+}
+
+#modalImg {
+    max-width: 100%;
+}
+
+.QtyStatus {
+    float: left;
+    margin-left: 6%;
+    margin-right: 6%;
+}
+
+#removeDishButton {
+    width: 38px;
+}
+
+#addDishButton {
+    width: 38px;
+}
+
+#dishQuantity {
+    align-items: center;
+    max-width: 15%;
+}
