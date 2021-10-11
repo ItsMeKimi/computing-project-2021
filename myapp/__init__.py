@@ -1,4 +1,5 @@
 from enum import unique
+from sqlite3.dbapi2 import Cursor
 from flask import Flask, render_template, request, session, url_for
 from google.auth import crypt
 from google.auth import jwt
@@ -12,7 +13,16 @@ from werkzeug.utils import redirect
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = 'IIWWC96ZE1K7WJB8LY8M8VQ80OC4A4884QJCH3KIL3Y5F19P03R13PYEPO9JOST91S72IJ6BMB7MGY2EYMB8HT72MRD0IBSBB6D33D6OFZ87J7EYEO6KXP9MX3MD8M1TSAGPS2TCXXOXJNBA71WKVOMGM5M41ZMI2BQZG5SUN2Y9RI3WW2O4EMNBGUM7MQEOQRF2ESRBQ85DYTXRK0QT04I7L4RXLJ3XFZHUS7MIWT0Z0ETRR8SAAX6IHJ73OO6O'
-users_db_path = os.path.join(BASE_DIR, "users.db")
+
+# Path to database
+
+db_path = os.path.join(BASE_DIR, "database.db")
+
+#
+#
+# Server Related
+#
+#
 
 # Get Current Server Timing
 
@@ -40,8 +50,12 @@ def internal_server_error(error):
     return render_template('/500/500.html'), 500
 
 #
-# Decode JWT Data
 #
+# User Related
+#
+#
+
+# Decode JWT Data
 
 def decode_JWT_data(data):
     decoded = jwt.decode(data, certs=None, verify=False)
@@ -50,9 +64,7 @@ def decode_JWT_data(data):
     checkUserInfo(decoded)
     return decoded
 
-#
 # Get the column info from a decoded JWT Token
-#
 
 def getColumnInfo(data):
     iss = data['iss'] 
@@ -65,16 +77,15 @@ def getColumnInfo(data):
     family_name = data['family_name']
     return iss, sub, hd, email, email_verified, name, given_name, family_name
 
-#
-# Check if User already has Data in Database ; If No Data, create new entry and upload to Database
-#
+# Check if User already has Data in Database ; If No Data, 
+# create new entry and upload to Database
 
 def checkUserInfo(data):
     _iss, _sub, _hd, _email, _email_verified, _name, _given_name, _family_name = getColumnInfo(data)
     sub_data = ''
 
     try:
-        sqliteConnection = sqlite3.connect(users_db_path)
+        sqliteConnection = sqlite3.connect(db_path)
         cursor = sqliteConnection.cursor()
         print("[checkUserInfo] Connected to Database")
 
@@ -115,7 +126,7 @@ def retrieveUserInfo(sub_data):
     _sub = sub_data
 
     try:
-        sqliteConnection = sqlite3.connect(users_db_path)
+        sqliteConnection = sqlite3.connect(db_path)
         cursor = sqliteConnection.cursor()
         print("[retrieveUserInfo] Connected to Database")
 
@@ -150,7 +161,7 @@ def deleteUserInfo(sub_data):
     _sub = sub_data
 
     try:
-        sqliteConnection = sqlite3.connect(users_db_path)
+        sqliteConnection = sqlite3.connect(db_path)
         cursor = sqliteConnection.cursor()
         print("[deleteUserInfo] Connected to Database")
 
@@ -172,7 +183,80 @@ def deleteUserInfo(sub_data):
 # Update session status
 
 #
+#
+# Orders Related
+#
+#
+
+# Get Dish from Dish Table
+
+def getDishID(dish_name):
+    _name = dish_name
+
+    try:
+        sqliteConnection = sqlite3.connect(db_path)
+        cursor = sqliteConnection.cursor()
+        print('[getDishID] Connected to Database')
+
+        sql_select_query = """SELECT DishID
+                                FROM Dish
+                                WHERE DishName = ?"""
+
+        result_data_cursor_object = cursor.execute(sql_select_query, (_name,))
+
+        for item in result_data_cursor_object:
+            result = item[0]
+
+        sqliteConnection.commit()
+        cursor.close()
+        print(f"{get_requester_ip()} - - [{get_time()}] < [DATABASE --- DISH] [{_name}] > DishID for this Dish Name Retrieved")
+
+        return result
+    
+    except sqlite3.Error as error:
+        print('[getDishID] Error while connecting to sqlite3', error)
+    finally:
+        if sqliteConnection:
+            sqliteConnection.close()
+            print('[getDishID] Connection to Database closed')
+
+# Add order to Orders Table
+
+def addOrder(sub_data, orderID, dishID, dishQty):
+    _sub = sub_data
+    _OrderID = orderID
+    _DishID = dishID
+    _qty = dishQty
+
+    try:
+        sqliteConnection = sqlite3.connect(db_path)
+        cursor = sqliteConnection.cursor()
+        print('[addOrder] Connected to Database')
+
+        sql_add_query = """INSERT INTO Orders
+                                (Sub, OrderID, DishID, Quantity)
+                                VALUES
+                                (?, ?, ?, ?);"""
+
+        data_tuple = (_sub, _OrderID, _DishID, _qty)
+        result_data_cursor_object = cursor.execute(sql_add_query, data_tuple)
+
+        sqliteConnection.commit()
+        cursor.close()
+        print(f"{get_requester_ip()} - - [{get_time()}] < [DATABASE --- ORDERS] Order Added of [{_sub},{_OrderID},{_DishID},{_qty}]")
+        return
+
+    except sqlite3.Error as error:
+        print('[addOrder] Error while connecting to sqlite3', error)
+    finally:
+        if sqliteConnection:
+            sqliteConnection.close()
+            print("[addOrder] Connection to Database closed")
+
+#
+#
 # App Configuration
+#
 #
 
 def mysite_app(test_config=None):
@@ -194,6 +278,7 @@ def mysite_app(test_config=None):
                 datafromjs = request.form['mydata']
                 decoded_JWT_data = decode_JWT_data(datafromjs)
                 session['session_id'] = decoded_JWT_data['sub']
+                session['order_count'] = 1
                 #print(f"{get_requester_ip()} - - [{get_time()}] {decoded_JWT_data}")
                 return redirect('/menu')
         else:
@@ -223,7 +308,7 @@ def mysite_app(test_config=None):
         
         return render_template('/my-account/my-account.html', data=row)
 
-    @app.route('/menu')
+    @app.route('/menu', methods=['GET', 'POST'])
     async def menu():
         if request.method == "POST":
             if session:
@@ -236,18 +321,24 @@ def mysite_app(test_config=None):
 
     # Store Pages
 
-    @app.route('/menu/cafe')
+    @app.route('/menu/cafe', methods=['GET', 'POST'])
     async def menuStore0():
         if request.method == "POST":
             if session:
                 uniqueSessionID = session['session_id']
+                dishName, dishQty = request.form['dishName'], request.form['dishQty']
+                order_count = session['order_count']
+                orderID = str(uniqueSessionID[:5]) + str(uniqueSessionID[-5:]) + '-' + str(order_count)
+                dishID = getDishID(dishName)
+
+                order = addOrder(uniqueSessionID, orderID, dishID, dishQty)
         else:
             if not session:
                 return redirect('/login')
         
         return render_template('/store/store0.html')
 
-    @app.route('/menu/chicken-rice')
+    @app.route('/menu/chicken-rice', methods=['GET', 'POST'])
     async def menuStore1():
         if request.method == "POST":
             if session:
@@ -258,7 +349,7 @@ def mysite_app(test_config=None):
         
         return render_template('/store/store1.html')
 
-    @app.route('/menu/japanese-food')
+    @app.route('/menu/japanese-food', methods=['GET', 'POST'])
     async def menuStore5():
         if request.method == "POST":
             if session:
@@ -269,7 +360,7 @@ def mysite_app(test_config=None):
         
         return render_template('/store/store5.html')
 
-    @app.route('/menu/korean-food')
+    @app.route('/menu/korean-food', methods=['GET', 'POST'])
     async def menuStore9():
         if request.method == "POST":
             if session:
@@ -280,7 +371,7 @@ def mysite_app(test_config=None):
         
         return render_template('/store/store9.html')
 
-    @app.route('/menu/vegetarian-food')
+    @app.route('/menu/vegetarian-food', methods=['GET', 'POST'])
     async def menuStore10():
         if request.method == "POST":
             if session:
@@ -291,7 +382,7 @@ def mysite_app(test_config=None):
         
         return render_template('/store/store10.html')
 
-    @app.route('/menu/thai-food')
+    @app.route('/menu/thai-food', methods=['GET', 'POST'])
     async def menuStore11():
         if request.method == "POST":
             if session:
@@ -302,7 +393,7 @@ def mysite_app(test_config=None):
         
         return render_template('/store/store11.html')
 
-    @app.route('/menu/western-food')
+    @app.route('/menu/western-food', methods=['GET', 'POST'])
     async def menuStore12():
         if request.method == "POST":
             if session:
@@ -313,7 +404,7 @@ def mysite_app(test_config=None):
         
         return render_template('/store/store12.html')
 
-    @app.route('/menu/ahma-mixed-chinese-rice')
+    @app.route('/menu/ahma-mixed-chinese-rice', methods=['GET', 'POST'])
     async def menuStore13():
         if request.method == "POST":
             if session:
@@ -324,7 +415,7 @@ def mysite_app(test_config=None):
         
         return render_template('/store/store13.html')
 
-    @app.route('/menu/malay-food')
+    @app.route('/menu/malay-food', methods=['GET', 'POST'])
     async def menuStore15():
         if request.method == "POST":
             if session:

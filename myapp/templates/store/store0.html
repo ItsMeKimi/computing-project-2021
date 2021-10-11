@@ -123,6 +123,23 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function clickMe(input) {
+            var fd = new FormData();
+            fd.append('dishName', input[0])
+            fd.append('dishQty', input[1])
+
+            var decodeMe = $.ajax({
+                contentType: false,
+                processData: false,
+                type: "POST",
+                url: "/menu/cafe",
+                async: true,
+                data: fd,
+            });
+        }
+    </script>
 {% endblock %}
 
 {% block addJS %} 
