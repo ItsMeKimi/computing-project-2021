@@ -1,11 +1,11 @@
 {% extends 'template.html' %}
 
-{% block title %} Menu {% endblock %}
+{% block title %} Contact {% endblock %}
 
 {% block mainBody %}
     <div class="storeBox">
         <div id="1" class="menuItem">
-            <a class="storePage" href='/menu/chicken-rice'>
+            <a class="storePage" data-bs-toggle="modal" data-bs-target="#Modal" data-bs-internalData='1'>
                 <figure>
                     <img class="menuImg" src="https://raw.githubusercontent.com/ItsMeKimi/computing-project-2021/master/myapp/static/img/Hainanese_Chicken_Rice.jpg">
                     <figcaption>
@@ -22,7 +22,7 @@
             </a>
         </div>
         <div id="5" class="menuItem">
-            <a class="storePage" href='/menu/japanese-food'>
+            <a class="storePage" data-bs-toggle="modal" data-bs-target="#Modal" data-bs-internalData='5'>
                 <figure>
                     <img class="menuImg" src="https://raw.githubusercontent.com/ItsMeKimi/computing-project-2021/master/myapp/static/img/Hainanese_Chicken_Rice.jpg">
                     <figcaption>
@@ -39,7 +39,7 @@
             </a>
         </div>
         <div id="9" class="menuItem">
-            <a class="storePage" href='/menu/korean-food'>
+            <a class="storePage" data-bs-toggle="modal" data-bs-target="#Modal" data-bs-internalData='9'>
                 <figure>
                     <img class="menuImg" src="https://raw.githubusercontent.com/ItsMeKimi/computing-project-2021/master/myapp/static/img/Hainanese_Chicken_Rice.jpg">
                     <figcaption>
@@ -56,7 +56,7 @@
             </a>
         </div>
         <div id='10' class="menuItem">
-            <a class="storePage" href='/menu/vegetarian-food'>
+            <a class="storePage" data-bs-toggle="modal" data-bs-target="#Modal" data-bs-internalData='10'>
                 <figure>
                     <img class="menuImg" src="https://raw.githubusercontent.com/ItsMeKimi/computing-project-2021/master/myapp/static/img/Hainanese_Chicken_Rice.jpg">
                     <figcaption>
@@ -73,7 +73,7 @@
             </a>
         </div>
         <div id='11' class="menuItem">
-            <a class="storePage" href='/menu/thai-food'>
+            <a class="storePage" data-bs-toggle="modal" data-bs-target="#Modal" data-bs-internalData='11'>
                 <figure>
                     <img class="menuImg" src="https://raw.githubusercontent.com/ItsMeKimi/computing-project-2021/master/myapp/static/img/Hainanese_Chicken_Rice.jpg">
                     <figcaption>
@@ -90,7 +90,7 @@
             </a>
         </div>
         <div id='12' class="menuItem">
-            <a class="storePage" href='/menu/western-food'>
+            <a class="storePage" data-bs-toggle="modal" data-bs-target="#Modal" data-bs-internalData='12'>
                 <figure>
                     <img class="menuImg" src="https://raw.githubusercontent.com/ItsMeKimi/computing-project-2021/master/myapp/static/img/Hainanese_Chicken_Rice.jpg">
                     <figcaption>
@@ -107,7 +107,7 @@
             </a>
         </div>
         <div id='13' class="menuItem">
-            <a class="storePage" href='/menu/ahma-mixed-chinese-rice'>
+            <a class="storePage" data-bs-toggle="modal" data-bs-target="#Modal" data-bs-internalData='13'>
                 <figure>
                     <img class="menuImg" src="https://raw.githubusercontent.com/ItsMeKimi/computing-project-2021/master/myapp/static/img/Hainanese_Chicken_Rice.jpg">
                     <figcaption>
@@ -124,7 +124,7 @@
             </a>
         </div>
         <div id='15' class="menuItem">
-            <a class="storePage" href='/menu/malay-food'>
+            <a class="storePage" data-bs-toggle="modal" data-bs-target="#Modal" data-bs-internalData='15'>
                 <figure>
                     <img class="menuImg" src="https://raw.githubusercontent.com/ItsMeKimi/computing-project-2021/master/myapp/static/img/Hainanese_Chicken_Rice.jpg">
                     <figcaption>
@@ -141,7 +141,7 @@
             </a>
         </div>
         <div id='0' class="menuItem">
-            <a class="storePage" href='/menu/cafe'>
+            <a class="storePage" data-bs-toggle="modal" data-bs-target="#Modal" data-bs-internalData='0'>
                 <figure>
                     <img class="menuImg" src="https://raw.githubusercontent.com/ItsMeKimi/computing-project-2021/master/myapp/static/img/Hainanese_Chicken_Rice.jpg">
                     <figcaption>
@@ -156,6 +156,51 @@
                     </figcaption>
                 </figure>
             </a>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class='container-fluid'>
+                        <div class='row'>
+                            <div class='col-7'>
+                                <img id='modalImg' src=''>
+                            </div>
+                            <div class='col-5 d-flex flex-column'>
+                                <div class='row'>
+                                    <p id='modalDescription'></p>
+                                </div>
+                                <div class='row marginTopAuto'>
+                                    <div class='col d-flex justify-content-center '>
+                                        <div class='d-flex justify-content-center'>
+                                            <button type="button" class="btn btn-secondary QtySelector justify-content-center" id='removeDishButton'>-</button>
+                                        </div>
+                                        <div class='d-flex justify-content-center QtyStatus' id="dishQuantity">
+                                            <form>
+                                                <input type='text' class='form-control' id='dishQty' value='0'>
+                                            </form>
+                                        </div>
+                                        <div class='d-flex justify-content-center'>
+                                            <button type="button" class="btn btn-secondary QtySelector justify-content-center" id='addDishButton'>+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

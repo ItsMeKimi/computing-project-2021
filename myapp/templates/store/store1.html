@@ -1,0 +1,86 @@
+{% extends 'template.html' %}
+
+{% block title %} Chicken Rice {% endblock %}
+
+{% block addCSS %} 
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/group.css') }}" />
+{% endblock %}
+
+{% block mainBody %}
+<div id="popup" class="notification">
+    <p id="popup-text" ></p>
+    </div>
+
+    <!-- dish modals -->
+    <div id="generic-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick = CloseModal()>&times;</span>
+            <div class='img'>
+                <img class="dish_photo" id="dish-image" src="">
+            </div>
+            <div class='info'>
+                <p id="dish-name"></p>
+                <p id="dish-description"></p>
+                <p id="dish-price"></p>
+            </div>
+            <!-- <p id="time-indicator">Estimated wait time: 5 minutes</p> -->
+            <div class='addminus'>
+                <button class="QtySelector" id = "dish-remove" onclick = ""><p>-</p></button>
+                <p class="QtyStatus" id="dish-qty"></p>
+                <button class="QtySelector" id="dish-add"><p>+</p></button>
+            </div>
+            <button class="modal-button" onclick= CloseModal()>Continue Ordering</button>
+            <button class="modal-button" onclick= disp()>Order Summary</button>
+            <!--<button class="modal-button" onclick= OpenCart()>View Order Cart</button>-->
+        </div>
+    </div>
+
+
+
+    <!-- order-modal -->
+    <div id="order-modal" class="order-modal">
+        <div class="order-modal-content">
+        <span class="close" onclick = Closeordermodal()>&times;</span>
+        <p id="dish-details"></p>
+        <button class="modal-button" onclick= Closeordermodal()>Continue Ordering</button>
+        </div>
+    </div>
+
+    <div class="imageformat">
+        <div class="center" onclick= OpenModal(chickenRice)>
+            <h2>Chicken Rice</h2>
+            <div class = "img">
+                <img src="https://raw.githubusercontent.com/ItsMeKimi/computing-project-2021/master/myapp/static/img/Hainanese_Chicken_Rice.jpg">
+            </div>
+        </div>
+
+        <div class="center"  onclick= OpenModal(spicyChickenNoodle)>
+            <h2>Spicy Chicken Noodle</h2>
+            <div class="img">
+                <img src="https://raw.githubusercontent.com/ItsMeKimi/computing-project-2021/master/myapp/static/img/Hainanese_Chicken_Rice.jpg">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="imageformat">
+        <div class = "center">
+            <h2></h2>
+            <div class = "img">
+                <img src="https://raw.githubusercontent.com/ItsMeKimi/computing-project-2021/master/myapp/static/img/Hainanese_Chicken_Rice.jpg">
+            </div>
+        </div>
+        
+        <div class = "center">
+            <h2></h2>
+            <div class = "img">
+                <img src="https://raw.githubusercontent.com/ItsMeKimi/computing-project-2021/master/myapp/static/img/Hainanese_Chicken_Rice.jpg">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block addJS %} 
+    <script src="{{ url_for('static', filename='js/store/store1.js') }}"></script>
+{% endblock %}

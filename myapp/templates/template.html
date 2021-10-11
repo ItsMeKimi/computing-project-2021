@@ -16,6 +16,9 @@
         <!-- Google Related -->
         <meta name="google-signin-client_id" content="268607576142-fji5gsrr48196i4kd4ce6e20al1nrl44.apps.googleusercontent.com">
         <meta name="google-site-verification" content="m9UJk7PDwedT-6NtdTroMl3seI6up0bzGbATqs7HmBQ" />
+
+        <!-- Additional CSS Files if needed -->
+        {% block addCSS %} {% endblock %}
     </head>
 
     <body>
@@ -32,6 +35,7 @@
                         <a href="/my-account" class="nav-item nav-link">My Account</a>
                         <a href="/about" class="nav-item nav-link">About</a>
                         <a href="/contact" class="nav-item nav-link">Contact</a>
+                        <a href="/menu" class="nav-item nav-link">Menu</a>
                     </div>
                 </div>
             </div>
@@ -46,17 +50,17 @@
 
         <!-- JavaScript Libraries -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-        
-        <!-- Contact Javascript File -->
-        <script src="{{ url_for('static', filename='mail/jqBootstrapValidation.min.js') }}" type="style/js"></script>
-        <script src="{{ url_for('static', filename='mail/contact.js') }}" type="style/js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script> -->
 
         <!-- Template Javascript -->
         <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
         <!-- Google Identity Client API-->
         <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+        <!-- Bootstrap -->
+        <link href="{{ url_for('static', filename='css/bootstrap/5.1.1/bootstrap.css') }}">
+        <script src="{{ url_for('static', filename='js/bootstrap/5.1.1/bootstrap.js') }}"></script>
 
         <!-- Additional Javascript Files if Needed -->
         {% block addJS %} {% endblock %}

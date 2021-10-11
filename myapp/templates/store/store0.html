@@ -1,0 +1,130 @@
+{% extends 'template.html' %}
+
+{% block title %} Cafe {% endblock %}
+
+{% block mainBody %}
+    <div class="dishBox">
+        <div id="0" class="dish">
+            <a class="dishPage" data-bs-toggle="modal" data-bs-target="#Modal" data-bs-internalData='0'>
+                <figure>
+                    <img class="dishImg" src="https://raw.githubusercontent.com/ItsMeKimi/computing-project-2021/master/myapp/static/img/Hainanese_Chicken_Rice.jpg">
+                    <figcaption>
+                        <span class="dishItem">
+                            <span class="dishItemName">
+                                Donut
+                            </span>
+                            <div class="dishItemPrice">
+                                $1.50
+                            </div>
+                        </span>
+                    </figcaption>
+                </figure>
+            </a>
+        </div>
+        <div id="1" class="dish">
+            <a class="dishPage" data-bs-toggle="modal" data-bs-target="#Modal" data-bs-internalData='1'>
+                <figure>
+                    <img class="dishImg" src="https://raw.githubusercontent.com/ItsMeKimi/computing-project-2021/master/myapp/static/img/Hainanese_Chicken_Rice.jpg">
+                    <figcaption>
+                        <span class="dishItem">
+                            <span class="dishItemName">
+                                French Toast
+                            </span>
+                            <div class="dishItemPrice">
+                                $1.40
+                            </div>
+                        </span>
+                    </figcaption>
+                </figure>
+            </a>
+        </div>
+        <div id="2" class="dish">
+            <a class="dishPage" data-bs-toggle="modal" data-bs-target="#Modal" data-bs-internalData='2'>
+                <figure>
+                    <img class="dishImg" src="https://raw.githubusercontent.com/ItsMeKimi/computing-project-2021/master/myapp/static/img/Hainanese_Chicken_Rice.jpg">
+                    <figcaption>
+                        <span class="dishItem">
+                            <span class="dishItemName">
+                                Mac & Cheese
+                            </span>
+                            <div class="dishItemPrice">
+                                $2
+                            </div>
+                        </span>
+                    </figcaption>
+                </figure>
+            </a>
+        </div>
+        <div id='3' class="dish">
+            <a class="dishPage" data-bs-toggle="modal" data-bs-target="#Modal" data-bs-internalData='3'>
+                <figure>
+                    <img class="dishImg" src="https://raw.githubusercontent.com/ItsMeKimi/computing-project-2021/master/myapp/static/img/Hainanese_Chicken_Rice.jpg">
+                    <figcaption>
+                        <span class="dishItem">
+                            <span class="dishItemName">
+                                Croissant
+                            </span>
+                            <div class="dishItemPrice">
+                                $1.70
+                            </div>
+                        </span>
+                    </figcaption>
+                </figure>
+            </a>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="Modal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" data-bs-target='#Modal' aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class='container-fluid'>
+                        <div class='row'>
+                            <figure>
+                                <img id='modalImg' src=''>
+                                <figcaption>
+                                    <span id='notes'>
+
+                                    </span>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <div class='row justify-content-center'>
+                            <div class='row'>
+                                <p id='modalDescription'></p>
+                            </div>
+                            <div class='row'>
+                                <div class='col d-flex justify-content-center '>
+                                    <div class='d-flex justify-content-center'>
+                                        <button type="button" class="btn btn-secondary QtySelector justify-content-center" id='removeDishButton'>-</button>
+                                    </div>
+                                    <div class='d-flex justify-content-center QtyStatus' id="dishQuantity">
+                                        <form id='form'>
+                                            <input type="number" class='form-control' id='dishQty'>
+                                        </form>
+                                    </div>
+                                    <div class='d-flex justify-content-center'>
+                                        <button type="button" class="btn btn-secondary QtySelector justify-content-center" id='addDishButton'>+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-target='#Modal'>Close</button>
+                    <button type="button" class="btn btn-primary" id="saveChanges">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block addJS %} 
+    <script src="{{ url_for('static', filename='js/store/store0.js') }}"></script>
+{% endblock %}

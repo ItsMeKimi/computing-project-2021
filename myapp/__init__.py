@@ -234,6 +234,109 @@ def mysite_app(test_config=None):
 
         return render_template('/menu/menu.html')
 
+    # Store Pages
+
+    @app.route('/menu/cafe')
+    async def menuStore0():
+        if request.method == "POST":
+            if session:
+                uniqueSessionID = session['session_id']
+        else:
+            if not session:
+                return redirect('/login')
+        
+        return render_template('/store/store0.html')
+
+    @app.route('/menu/chicken-rice')
+    async def menuStore1():
+        if request.method == "POST":
+            if session:
+                uniqueSessionID = session['session_id']
+        else:
+            if not session:
+                return redirect('/login')
+        
+        return render_template('/store/store1.html')
+
+    @app.route('/menu/japanese-food')
+    async def menuStore5():
+        if request.method == "POST":
+            if session:
+                uniqueSessionID = session['session_id']
+        else:
+            if not session:
+                return redirect('/login')
+        
+        return render_template('/store/store5.html')
+
+    @app.route('/menu/korean-food')
+    async def menuStore9():
+        if request.method == "POST":
+            if session:
+                uniqueSessionID = session['session_id']
+        else:
+            if not session:
+                return redirect('/login')
+        
+        return render_template('/store/store9.html')
+
+    @app.route('/menu/vegetarian-food')
+    async def menuStore10():
+        if request.method == "POST":
+            if session:
+                uniqueSessionID = session['session_id']
+        else:
+            if not session:
+                return redirect('/login')
+        
+        return render_template('/store/store10.html')
+
+    @app.route('/menu/thai-food')
+    async def menuStore11():
+        if request.method == "POST":
+            if session:
+                uniqueSessionID = session['session_id']
+        else:
+            if not session:
+                return redirect('/login')
+        
+        return render_template('/store/store11.html')
+
+    @app.route('/menu/western-food')
+    async def menuStore12():
+        if request.method == "POST":
+            if session:
+                uniqueSessionID = session['session_id']
+        else:
+            if not session:
+                return redirect('/login')
+        
+        return render_template('/store/store12.html')
+
+    @app.route('/menu/ahma-mixed-chinese-rice')
+    async def menuStore13():
+        if request.method == "POST":
+            if session:
+                uniqueSessionID = session['session_id']
+        else:
+            if not session:
+                return redirect('/login')
+        
+        return render_template('/store/store13.html')
+
+    @app.route('/menu/malay-food')
+    async def menuStore15():
+        if request.method == "POST":
+            if session:
+                uniqueSessionID = session['session_id']
+        else:
+            if not session:
+                return redirect('/login')
+        
+        return render_template('/store/store15.html')
+
+    # End of Stores
+
     @app.route('/about')
     def about():
         return render_template('/about/about.html')

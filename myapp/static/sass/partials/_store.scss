@@ -1,11 +1,6 @@
 @import "template";
 
-@mixin menuImgContainer {
-    @include display-flex();
-    @include justify-content-center();
-}
-
-@mixin menuItem {
+@mixin dish {
     @include justify-content-center();
     flex-wrap: nowrap !important; 
 }
@@ -14,7 +9,7 @@
     cursor: pointer;
 }
 
-@mixin menuItemStoreTitle {
+@mixin dishItem {
     color: black !important;
 }
 
@@ -25,15 +20,15 @@
 
 // For laptops and tablets
 @media screen and (min-width: 481px) {
-    .menuItem {
-        @include menuItem;
+    .dish {
+        @include dish();
         @include cursor-pointer();
     
         padding: 10px;
         width: 17.5vw;
     }
     
-    .menuImg {
+    .dishImg {
         display: block;
         max-width: 100%;
         max-height: 100%;
@@ -45,15 +40,11 @@
         text-align: center;
     }
     
-    .menuImgContainer {
-        @include menuImgContainer();
+    .dishItem {
+        @include dishItem();
     }
     
-    .menuItemStoreTitle {
-        @include menuItemStoreTitle();
-    }
-    
-    .menuItemStoreName, .menuItemStoreName {
+    .dishItemName {
         @include font-weight-bold();
     }
     
@@ -65,7 +56,7 @@
         text-decoration: none !important;
     }
     
-    .storeBox {
+    .dishBox {
         @include flex-container();
     
         width: 70vw;
@@ -75,15 +66,15 @@
 // For mobile devices
 
 @media screen and (max-width: 480px) {
-    .menuItem {
-        @include menuItem;
+    .dish {
+        @include dish();
         @include cursor-pointer();
 
         padding: 1vw;
         width: 94vw;
     }
     
-    .menuImg {
+    .dishImg {
         display: block;
         max-width: 100%;
         max-height: 100%;
@@ -95,15 +86,11 @@
         text-align: center;
     }
     
-    .menuImgContainer {
-        @include menuImgContainer();
+    .dishItem {
+        @include dishItem();
     }
     
-    .menuItemStoreTitle {
-        @include menuItemStoreTitle();
-    }
-    
-    .menuItemStoreName, .menuItemStoreName {
+    .dishItemName{
         @include font-weight-bold();
     }
     
@@ -115,7 +102,45 @@
         text-decoration: none !important;
     }
     
-    .storeBox {
+    .dishBox {
         @include flex-container();
     }
+}
+
+#modalImg {
+    max-width: 100%;
+}
+
+.QtyStatus {
+    float: left;
+    margin-left: 6%;
+    margin-right: 6%;
+}
+
+#removeDishButton {
+    width: 38px;
+}
+
+#addDishButton {
+    width: 38px;
+}
+
+#dishQuantity {
+    align-items: center;
+    max-width: 12.5%;
+}
+
+// Remove Arrows / Spinners on Input Type Number fields
+// https://www.w3schools.com/howto/howto_css_hide_arrow_number.asp
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
