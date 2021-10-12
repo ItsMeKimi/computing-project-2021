@@ -92,7 +92,7 @@ img {
   display: flex; /* Hidden by default */
   margin: auto;/* Location of the box */
   position: fixed; /* Stay in place */
-  z-index: 11; /* Sit on top */
+  z-index: 13; /* Sit on top */
   width: 20%; /* Full width */
   border: 2px solid red;
   overflow: auto; /* Enable scroll if needed */

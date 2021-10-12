@@ -1,5 +1,5 @@
 from enum import unique
-from sqlite3.dbapi2 import Cursor
+from sqlite3.dbapi2 import SQLITE_TRANSACTION, Cursor
 from flask import Flask, render_template, request, session, url_for
 from google.auth import crypt
 from google.auth import jwt
@@ -252,6 +252,18 @@ def addOrder(sub_data, orderID, dishID, dishQty):
         if sqliteConnection:
             sqliteConnection.close()
             print("[addOrder] Connection to Database closed")
+
+def removeOrder(orderID):
+    _OrderID = orderID
+
+    try:
+        sqliteConnection = sqlite3.connect(db_path)
+        cursor = sqliteConnection.cursor()
+        print('[removeOrder] Connected to Database')
+
+        sql_delete_query = """"""
+    except sqlite3.Error as error:
+        return
 
 #
 #
