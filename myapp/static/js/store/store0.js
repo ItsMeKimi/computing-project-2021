@@ -1,56 +1,55 @@
 // List of vars (dishs)
 
+// Start
 
-var dish0 = {
-    id: 0,
-    dishName: "Donut",
-    price: '$1.50',
-    img: "https://raw.githubusercontent.com/ItsMeKimi/computing-project-2021/master/myapp/static/img/Hainanese_Chicken_Rice.jpg",
-    // Harder to implement ETA feature - possibly in an update?
-    // ETA: 0,
-    // For dishes that require additional information on them
-    // Note: ''
+var DishID1 = {
+    DishID: 1,
+    DishName: "Donut",
+    ImgURL: "https://raw.githubusercontent.com/ItsMeKimi/computing-project-2021/master/myapp/static/img/Hainanese_Chicken_Rice.jpg",
+    Price: '$1.50',
 };
 
-var dish1 = {
-    id: 1,
-    dishName: "French Toast",
-    price: '$1.40',
-    img: "https://raw.githubusercontent.com/ItsMeKimi/computing-project-2021/master/myapp/static/img/Hainanese_Chicken_Rice.jpg",
+var DishID2 = {
+    DishID: 2,
+    DishName: "French Toast",
+    ImgURL: "https://raw.githubusercontent.com/ItsMeKimi/computing-project-2021/master/myapp/static/img/Hainanese_Chicken_Rice.jpg",
+    Price: '$1.40',
 };
 
-var dish2 = {
-    id: 2,
-    dishName: "Mac & Cheese",
-    price: '$2',
-    img: "https://raw.githubusercontent.com/ItsMeKimi/computing-project-2021/master/myapp/static/img/Hainanese_Chicken_Rice.jpg",
+var DishID3 = {
+    DishID: 3,
+    DishName: "Mac & Cheese",
+    ImgURL: "https://raw.githubusercontent.com/ItsMeKimi/computing-project-2021/master/myapp/static/img/Hainanese_Chicken_Rice.jpg",
+    Price: '$2.00',
 };
 
-var dish3 = {
-    id: 3,
-    dishName: "Croissant",
-    price: '$1.70',
-    img: "https://raw.githubusercontent.com/ItsMeKimi/computing-project-2021/master/myapp/static/img/Hainanese_Chicken_Rice.jpg",
+var DishID4 = {
+    DishID: 4,
+    DishName: "Croissant",
+    ImgURL: "https://raw.githubusercontent.com/ItsMeKimi/computing-project-2021/master/myapp/static/img/Hainanese_Chicken_Rice.jpg",
+    Price: '$1.70',
 };
 
 function getDishData(id) {
     switch (id) {
-        case '0':
-            return dish0;
+        case 'DishID1':
+            return DishID1;
             break;
-        case '1':
-            return dish1;
+        case 'DishID2':
+            return DishID2;
             break;
-        case '2':
-            return dish2;
+        case 'DishID3':
+            return DishID3;
             break;
-        case '3':
-            return dish3;
+        case 'DishID4':
+            return DishID1;
             break;
         default:
             return;
     };
 };
+
+// End
 
 // Other Code
 
@@ -62,46 +61,37 @@ var dataModal = document.getElementById('Modal');
 var addButton = dataModal.querySelector('#addDishButton');
 var removeButton = dataModal.querySelector('#removeDishButton');
 var saveChangesButton = dataModal.querySelector('#saveChanges');
+var orderQuantityBox = dataModal.querySelector('#dishQty')
 
 var bootstrapModal = bootstrap.Modal.getOrCreateInstance(dataModal);
 
 // End global variables
-
-var orderQuantity = dataModal.querySelector('#dishQty')
 
 // Default blank order list
 // Stored in the form of a Javascript Object with key-value pairs
 // Key is the id of the dish
 // Value is the Qty of the dish
 
-var orders = {
-
-};
+var orderArray = []
 
 // End default blank order list
-
-function finaliseOrders() {
-    let currentOrderQuantity = 
-    closeModal();
-};
 
 function closeModal() {
     bootstrapModal.hide();
 };
 
-saveChangesButton.onclick = function () {
-    finaliseOrders();
-};
+// 1 Nov 12.29am | Perhaps move these into the modal below to get the internalData,
+// then follow up by adding to orders list in key, value pair of [ID, # to buy]
 
-dataModal.addEventListener('show.bs.modal', function (event) {
+$('#Modal').on('show.bs.modal', function (event) {
     var button = event.relatedTarget;
     var internalData = button.getAttribute('data-bs-internalData');
 
-    let dishData = getDishData(internalData);
+    let dishData = getDishData(internalData)
 
     var modalImg = dataModal.querySelector('#modalImg');
     var modaldishName = dataModal.querySelector('.modal-title');
-    var additionalNotes = dataModal.querySelector('#notes');
+    // var additionalNotes = dataModal.querySelector('#notes');
 
     function addPriceToTitle(price) {
         let _temp = ' (' + price + ')';
@@ -109,63 +99,80 @@ dataModal.addEventListener('show.bs.modal', function (event) {
         return _temp
     };
 
-    function ifAdditionalNotes() {
-        let _temp = dishData['note'];
-        if (_temp == undefined) {
-            return
-        } else {
-            return 'Note: ' + _temp
+    modaldishName.textContent = dishData.DishName + addPriceToTitle(dishData.Price);
+    modalImg.src = dishData.ImgURL;
+    // additionalNotes.textContent = ifAdditionalNotes();
+
+    // For the modal's buttons and qty display
+
+
+    if (orderArray.length > 0) {
+        var _exists = false;
+        for (index in orderArray) {
+            var _singleOrder = orderArray[index];
+            if (_singleOrder[0] == dishData.DishName) { // Order exists in Array
+				orderQuantityBox.value = _singleOrder[1];
+				var orderQuantity = _singleOrder[1];
+                _exists = true;
+			}
+
+            if (_exists == true) {
+                break;
+            }
         }
+
+        if (_exists = true) {
+            console.log('Found order in orderArray');
+        } else {
+            console.log('orderArray is non-empty but order does not exist');
+        }
+    } else {
+        orderQuantityBox.value = 0;
+        var orderQuantity = 0;
     }
 
-    modalImg.src = dishData.img;
-    modaldishName.textContent = dishData.dishName + addPriceToTitle(dishData.price);
-    additionalNotes.textContent = ifAdditionalNotes();
-
-    // Parts subject to change
-
-    // Set value to 0 every time it is opened (assuming not saved)
-    orderQuantity.value = 0;
-
     addButton.onclick = function () {
-        orderQuantity.value++;
-        ensureLegal();
+        orderQuantity++;
+		ensureLegal();
+		updateOrderQuantityBox();
     };
     
     removeButton.onclick = function () {
-        orderQuantity.value--;
-        ensureLegal();
-    };
-    
-    orderQuantity.oninput = function (e) {
-        updateValue(e);
+        orderQuantity--;
+		ensureLegal();
+		updateOrderQuantityBox();
     };
 
-    var _tempValue = NaN;
-
-    function updateValue(e) {
-        _value = ensureLegal();
-
-        if (Number(e.data) == NaN) {
-            orderQuantity.value = _value;
-        } else {
-            orderQuantity.value = e.target.value;
-            ensureLegal();
-        }
-    };
-
-    function ensureLegal() {
-        if (orderQuantity.value > 10) {
-            orderQuantity.value = 10;
-        } else if (orderQuantity.value < 0) {
-            orderQuantity.value = 0;
-        } else if (Number(orderQuantity.value) == NaN) {
-            orderQuantity.value = 0;
+	function ensureLegal() {
+        if (orderQuantity > 10) {
+            orderQuantity = 10;
+        } else if (orderQuantity < 0) {
+            orderQuantity = 0;
+        } else if (Number(orderQuantity) == NaN) {
+            orderQuantity = 0;
         };
-
-        if (Number(orderQuantity.value) != NaN) {
-            _tempValue = orderQuantity.value;
-            return _tempValue
-        }
     };
+
+	function updateOrderQuantityBox() {
+		orderQuantityBox.value = orderQuantity; // Could be valueAsNumber ?
+        console.log('OrderQuantity: ' + orderQuantity)
+        console.log('orderQuantityBox: ' + orderQuantityBox.value)
+	}
+
+	// Submit button stuff
+
+	function finaliseCurrentOrder() {
+		let _key = dishData.DishName
+		let _value = orderQuantity
+		// Ignore those with 0 value
+		if (_value > 0) {
+			let order = [_key, _value]
+			orderArray.push(order)
+		}
+		closeModal()
+	}
+
+	saveChangesButton.onclick = function () {
+		finaliseCurrentOrder();
+	};
 });

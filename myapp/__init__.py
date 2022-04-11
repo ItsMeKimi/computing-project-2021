@@ -8,6 +8,7 @@ import sqlite3
 import os.path
 from pyasn1.type.univ import Null
 import asyncio
+from flask_caching import Cache
 
 from werkzeug.utils import redirect
 
@@ -261,9 +262,21 @@ def removeOrder(orderID):
         cursor = sqliteConnection.cursor()
         print('[removeOrder] Connected to Database')
 
-        sql_delete_query = """"""
+        sql_delete_query = """DELETE FROM Orders
+                                WHERE Sub = ?;"""
+
+        result_data_cursor_object = cursor.execute(sql_delete_query, (_OrderID,))
+
+        sqliteConnection.commit()
+        cursor.close()
+        print(f"{get_requester_ip()} - - [{get_time()}] < [DATABASE --- ORDERS] > Order Deleted of OrderID [{_OrderID}]")
+
     except sqlite3.Error as error:
-        return
+        print('[removeOrder] Error while connecting to sqlite3', error)
+    finally:
+        if sqliteConnection:
+            sqliteConnection.close()
+            print("[removeOrder] Connection to Database closed")
 
 #
 #
@@ -274,7 +287,11 @@ def removeOrder(orderID):
 def mysite_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(__name__)
- 
+
+    # Flask-Caching
+    #app.config['CACHE_TYPE'] = 'SimpleCache'
+    #cache.init_app(app)
+
     @app.route('/')
     def index():
         if 'session_id' in session:
