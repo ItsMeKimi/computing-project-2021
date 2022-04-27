@@ -2,4 +2,5 @@
 __pycache__
 myapp/__pycache__
 myapp/static/.webassets-cache
-myapp/static/css
+myapp/static/css/bootstrap/
+myapp/static/css/partials/

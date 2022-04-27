@@ -1,0 +1,441 @@
+/* Universal SCSS */
+/* Sub SCSS */
+/* Normal SCSS */
+/* Universal CSS */
+.mainBody {
+  /* Default */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  /* New */
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+/* Universal SCSS */
+/* Sub SCSS */
+/* Normal SCSS */
+/* Universal CSS */
+.mainBody {
+  /* Default */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  /* New */
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+.homePage {
+  /* Default */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  /* New */
+  flex-direction: column;
+  padding-top: 200px;
+  text-align: center;
+}
+
+/* Universal SCSS */
+/* Sub SCSS */
+/* Normal SCSS */
+/* Universal CSS */
+.mainBody {
+  /* Default */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  /* New */
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+.aboutPage {
+  /* Default */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  /* New */
+  flex-direction: column;
+  padding-top: 20px;
+  width: 500px;
+}
+
+/* Universal SCSS */
+/* Sub SCSS */
+/* Normal SCSS */
+/* Universal CSS */
+.mainBody {
+  /* Default */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  /* New */
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+.contactPage {
+  /* Default */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  /* New */
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+/* Universal SCSS */
+/* Sub SCSS */
+/* Normal SCSS */
+/* Universal CSS */
+.mainBody {
+  /* Default */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  /* New */
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+.loginPage {
+  /* Default */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  /* New */
+  flex-direction: column;
+  border-style: solid;
+  border-width: 3px;
+  border-radius: 20px;
+  padding: 100px;
+}
+
+.navbar {
+  position: relative;
+  transition: 0.5s;
+  z-index: 999;
+}
+
+.navbar.nav-sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.navbar .dropdown-menu {
+  margin-top: 0;
+  border: 0;
+  border-radius: 0;
+  background: #f8f9fa;
+}
+
+/* Universal SCSS */
+/* Sub SCSS */
+/* Normal SCSS */
+/* Universal CSS */
+.mainBody {
+  /* Default */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  /* New */
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+@media screen and (min-width: 481px) {
+  .dish {
+    justify-content: center;
+    flex-wrap: nowrap !important;
+    cursor: pointer;
+    padding: 10px;
+    width: 17.5vw;
+  }
+
+  .dishImg {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+  }
+
+  #menuItemName {
+    text-align: center;
+  }
+
+  .dishItem {
+    color: black !important;
+  }
+
+  .dishItemName {
+    font-weight: bold;
+  }
+
+  a {
+    text-decoration: none !important;
+  }
+
+  a:hover {
+    text-decoration: none !important;
+  }
+
+  .dishBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 70vw;
+  }
+}
+@media screen and (max-width: 480px) {
+  .dish {
+    justify-content: center;
+    flex-wrap: nowrap !important;
+    cursor: pointer;
+    padding: 1vw;
+    width: 94vw;
+  }
+
+  .dishImg {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+  }
+
+  #menuItemName {
+    text-align: center;
+  }
+
+  .dishItem {
+    color: black !important;
+  }
+
+  .dishItemName {
+    font-weight: bold;
+  }
+
+  a {
+    text-decoration: none !important;
+  }
+
+  a:hover {
+    text-decoration: none !important;
+  }
+
+  .dishBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}
+#modalImg {
+  max-width: 100%;
+}
+
+.QtyStatus {
+  float: left;
+  margin-left: 6%;
+  margin-right: 6%;
+}
+
+#removeDishButton {
+  width: 38px;
+}
+
+#addDishButton {
+  width: 38px;
+}
+
+#dishQuantity {
+  align-items: center;
+  max-width: 12.5%;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Universal SCSS */
+/* Sub SCSS */
+/* Normal SCSS */
+/* Universal CSS */
+.mainBody {
+  /* Default */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  /* New */
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+.myAccount {
+  /* Default */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  /* New */
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+/* Universal SCSS */
+/* Sub SCSS */
+/* Normal SCSS */
+/* Universal CSS */
+.mainBody {
+  /* Default */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  /* New */
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+@media screen and (min-width: 481px) {
+  .menuItem {
+    justify-content: center;
+    flex-wrap: nowrap !important;
+    cursor: pointer;
+    padding: 10px;
+    width: 17.5vw;
+  }
+
+  .menuImg {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+  }
+
+  #menuItemName {
+    text-align: center;
+  }
+
+  .menuImgContainer {
+    display: flex;
+    justify-content: center;
+  }
+
+  .menuItemStoreTitle {
+    color: black !important;
+  }
+
+  .menuItemStoreName, .menuItemStoreName {
+    font-weight: bold;
+  }
+
+  a {
+    text-decoration: none !important;
+  }
+
+  a:hover {
+    text-decoration: none !important;
+  }
+
+  .storeBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 70vw;
+  }
+}
+@media screen and (max-width: 480px) {
+  .menuItem {
+    justify-content: center;
+    flex-wrap: nowrap !important;
+    cursor: pointer;
+    padding: 1vw;
+    width: 94vw;
+  }
+
+  .menuImg {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+  }
+
+  #menuItemName {
+    text-align: center;
+  }
+
+  .menuImgContainer {
+    display: flex;
+    justify-content: center;
+  }
+
+  .menuItemStoreTitle {
+    color: black !important;
+  }
+
+  .menuItemStoreName, .menuItemStoreName {
+    font-weight: bold;
+  }
+
+  a {
+    text-decoration: none !important;
+  }
+
+  a:hover {
+    text-decoration: none !important;
+  }
+
+  .storeBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
